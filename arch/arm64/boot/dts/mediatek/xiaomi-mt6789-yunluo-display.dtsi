@@ -107,13 +107,21 @@
 			output-low;
 		};
 	};
+	mtkfb_pins_lcm_err_flag: lcm_err_flag {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO1__FUNC_GPIO1>;
+			slew-rate = <0>;
+			bias-pull-up = <11>;
+			input-enable;
+		};
+	};
 };
 &mtkfb {
 	pinctrl-names = "lcd_bias_enp1_gpio", "lcd_bias_enp0_gpio",
 		"lcd_bias_enn1_gpio", "lcd_bias_enn0_gpio",
 		"lcm_rst_out1_gpio", "lcm_rst_out0_gpio",
 		"mode_te_te", "lcm_ktzen_en1_gpio", "lcm_ktzen_en0_gpio",
-		"lcm_cam_en1_gpio", "lcm_cam_en0_gpio" ;
+		"lcm_cam_en1_gpio", "lcm_cam_en0_gpio", "err_flag_init" ;
 	pinctrl-0 = <&mtkfb_pins_lcd_bias_enp1>;
 	pinctrl-1 = <&mtkfb_pins_lcd_bias_enp0>;
 	pinctrl-2 = <&mtkfb_pins_lcd_bias_enn1>;
@@ -125,6 +133,7 @@
 	pinctrl-8 = <&mtkfb_pins_lcm_ktzen_en0>;
 	pinctrl-9 = <&mtkfb_pins_lcm_cam_en1>;
 	pinctrl-10 = <&mtkfb_pins_lcm_cam_en0>;
+	pinctrl-11 = <&mtkfb_pins_lcm_err_flag>;
 	status = "okay";
 };
 
@@ -132,7 +141,7 @@
 	pinctrl-names =
 		"lcm_rst_out1_gpio", "lcm_rst_out0_gpio",
 		"mode_te_te", "lcm_ktzen_en1_gpio", "lcm_ktzen_en0_gpio",
-		"lcm_cam_en1_gpio", "lcm_cam_en0_gpio" ;
+		"lcm_cam_en1_gpio", "lcm_cam_en0_gpio", "err_flag_init" ;
 	pinctrl-0 = <&mtkfb_pins_lcm_rst_out1_gpio>;
 	pinctrl-1 = <&mtkfb_pins_lcm_rst_out0_gpio>;
 	pinctrl-2 = <&mtkfb_pins_lcm_dsi_te>;
@@ -140,6 +149,7 @@
 	pinctrl-4 = <&mtkfb_pins_lcm_ktzen_en0>;
 	pinctrl-5 = <&mtkfb_pins_lcm_cam_en1>;
 	pinctrl-6 = <&mtkfb_pins_lcm_cam_en0>;
+	pinctrl-7 = <&mtkfb_pins_lcm_err_flag>;
 	status = "okay";
 };
 
@@ -156,6 +166,7 @@
 		//GPIO150 ENP; GPIO151 ENN
 		bias-gpios = <&pio 150 0>,
 			<&pio 151 0>;
+		mi,esd-err-irq-gpio = <&pio 1 0x2002>;
 		pinctrl-names = "default";
 		port {
 			panel_in1: endpoint {
@@ -172,6 +183,7 @@
 		//GPIO150 ENP; GPIO151 ENN
 		bias-gpios = <&pio 150 0>,
 			<&pio 151 0>;
+		mi,esd-err-irq-gpio = <&pio 1 0x2002>;
 		pinctrl-names = "default";
 		port {
 			panel_in2: endpoint {
@@ -188,6 +200,7 @@
 		//GPIO150 ENP; GPIO151 ENN
 		bias-gpios = <&pio 150 0>,
 			<&pio 151 0>;
+		mi,esd-err-irq-gpio = <&pio 1 0x2002>;
 		pinctrl-names = "default";
 		port {
 			panel_in3: endpoint {
